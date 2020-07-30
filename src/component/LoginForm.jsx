@@ -12,13 +12,14 @@ username = React.createRef();
  const username = this.username.current.value;
     }
 
-    handleChange = e=>{
+    handleChange = ({currentTarget: input})=>{
         const account = {...this.state};
-        account.username = e.currentTarget.value;
+        account[input.name] = input.value;
         this.setState({account})
     }
 
     render() {
+        const {account} = this.state;
         return (
             <div>
                 <h5>Login  form</h5>
@@ -26,13 +27,18 @@ username = React.createRef();
                  <div className="form-group">
                      <label htmlFor="username">Username</label>
                      <input
+                     name ="username"
                      onChange = {this.handleChange}
-                     value={this.state.account.username}
+                     value={account.username}
                      autoFocus ref ={this.username} id="username" type="text" className="form-control"/></div>
 
                  <div className="form-group">
                      <label htmlFor="password">Password</label>
-                     <input id="password" type="text" className="form-control"/></div>
+                     <input
+                     onChange = {this.handleChange}
+                     value = {account.password}
+                     name="password"
+                      id="password" type="text" className="form-control"/></div>
                      <button className="btn btn-primary">Login</button>
              </form>
 
