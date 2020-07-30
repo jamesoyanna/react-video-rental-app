@@ -7,8 +7,10 @@ import Rentals from "./component/pages/Rentals";
 import NotFound from "./component/pages/NotFound";
 import Customers from './component/pages/Customers';
 import NavBar from './component/pages/Navbar';
+import LoginForm from "./component/LoginForm";
 
 import "./App.css";
+
 
 
 function App() {
@@ -17,7 +19,8 @@ function App() {
     <NavBar />
     <main className="container">
       <Switch>
-        <Route path="/movies/movie:id" component={MoviesForm}></Route>
+        <Route path="/login" component={LoginForm} />
+        <Route path="/movies/:id" component={MoviesForm}></Route>
         <Route path="/movies" component={Movies}></Route>
         <Route path="/customers" component={Customers}></Route>
         <Route path="/rentals" component={Rentals}></Route>
