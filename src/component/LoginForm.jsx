@@ -4,24 +4,35 @@ import Input from './common/input';
 class LoginForm extends Component {
 
     state = {
-        account:{username: '', password: ''},
-        error: {}
+        account:{username: "", password: ""},
+        errors: {}
     }
 
     validate = ()=>{
-        return {username: "Username is required"}
-    }
+        const errors = {};
+        const {account} = this.state;
+        if(account.username.trim()==='')
+        errors.username = "Username is required"
+
+        if (account.password.trim()==='')
+             errors.password = "Password is required";
+        return Object.keys(errors).length ===0 ? null : errors;
+    };
+
 //username = React.createRef();
+//const username = this.username.current.value;
 
     handleSubmit = e =>{
         e.preventDefault();
-
      const errors = this.validate()
-         this.setState({errors})
-         if(errors) return
-         
-    const username = this.username.current.value;
-     }
+     console.log(errors);
+         this.setState({errors: errors || {}})
+         if(errors) return;
+
+         console.log("submitted");
+     };
+
+     
     
 
     handleChange = ({currentTarget: input})=>{
@@ -31,7 +42,7 @@ class LoginForm extends Component {
     }
 
     render() {
-        const {account} = this.state;
+        const {account, errors} = this.state;
         return (
           <div>
             <h5>Login form</h5>
@@ -41,7 +52,7 @@ class LoginForm extends Component {
                 value={account.username}
                 onChange={this.handleChange}
                 label="Username"
-               
+                error={errors.username}
               />
 
               <Input
@@ -49,6 +60,7 @@ class LoginForm extends Component {
                 value={account.password}
                 onChange={this.handleChange}
                 label="Password"
+                error={errors.password}
               />
 
               <button className="btn btn-primary">Login</button>
