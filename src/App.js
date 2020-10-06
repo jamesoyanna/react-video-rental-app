@@ -8,8 +8,10 @@ import NotFound from "./component/pages/NotFound";
 import Customers from './component/pages/Customers';
 import NavBar from './component/pages/Navbar';
 import LoginForm from "./component/LoginForm";
+import RegisterForm from "./component/RegisterForm.jsx";
 
 import "./App.css";
+
 
 
 
@@ -20,7 +22,8 @@ function App() {
     <main className="container">
       <Switch>
         <Route path="/login" component={LoginForm} />
-        <Route path="/movies/:id" component={MoviesForm}></Route>
+        <Route path="/register" component={RegisterForm} />
+        <Route path="/movies/:id" component={MoviesForm} />
         <Route path="/movies" component={Movies}></Route>
         <Route path="/customers" component={Customers}></Route>
         <Route path="/rentals" component={Rentals}></Route>

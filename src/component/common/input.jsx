@@ -1,18 +1,16 @@
 import React from 'react';
 
-const Input = ({name, label, value, onChange,errors}) => {
+const Input = ({name, label, error,...rest}) => {
   return ( 
     <div className="form-group">
       <label htmlFor="Username">{label}</label>
       <input
-        value={value}
-        onChange={onChange}
+         {...rest}
         autoFocus
         id={name}
-        type="text"
         name={name}
         className="form-control" />
-      {errors && <div className="alert alert-danger">{errors}</div> }
+      {error && <div className="alert alert-danger">{error}</div> }
           </div>
         
    );

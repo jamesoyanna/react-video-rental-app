@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { NavLink, Link } from "react-router-dom";
 import {getMovies} from '../component/services/fakeMovieService';
 import { getGenres } from '../component/services/fakeGenreService';
 import _ from 'lodash';
@@ -8,6 +8,7 @@ import  {paginate} from "../utils/paginate";
 import ListGroup  from './common/ListGroup';
 import MoviesTable from './MoviesTable';
 import Pagination from "./common/Pagination";
+
 
 
 class Movies extends Component {
@@ -22,6 +23,13 @@ class Movies extends Component {
   componentDidMount() {
     const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres });
+  }
+
+  // Adding new movies
+  addNewMovie= ()=>{
+    return (
+      <NavLink className="nav-item nav-link active" to="/movies/new"></NavLink>
+    );
   }
 
   handleDelete = movie => {
@@ -93,6 +101,15 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          {/* Render new movies*/}
+          <Link
+          to="/movies/new"
+            className="btn btn-primary"
+            style={{ marginBottom: 20 }}
+          >
+            New Movie
+          </Link>
+
           <p>
             There are <b>{totalCount}</b> movies in the database
           </p>
