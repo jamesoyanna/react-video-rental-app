@@ -69,16 +69,20 @@ class Movies extends Component {
       pageSize,
       currentPage,
       selectedGenre,
+      searchQuery,
       movies: allMovies,
       sortColumn
     } = this.state;
 
-     const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-        : allMovies;
+     let filtered = allMovies;
+     if (searchQuery)
+       filtered = allMovies.filter((m) =>
+         m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+       );
+     else if (selectedGenre && selectedGenre._id)
+       filtered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
        
-        const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order])
+        const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const movies = paginate(sorted, currentPage, pageSize);
     return { totalCount: filtered.length, data: movies };
@@ -89,6 +93,7 @@ class Movies extends Component {
       const {
       pageSize,
       currentPage,
+      searchQuery,
       //selectedGenre,
       movies: //allMovies,
       sortColumn
@@ -110,7 +115,7 @@ class Movies extends Component {
         <div className="col">
           {/* Render new movies*/}
           <Link
-          to="/movies/new"
+            to="/movies/new"
             className="btn btn-primary"
             style={{ marginBottom: 20 }}
           >
@@ -121,7 +126,7 @@ class Movies extends Component {
             There are <b>{totalCount}</b> movies in the database
           </p>
 
-           <SearchBox  />
+          <SearchBox value={searchQuery} onChange={this.handleSearch} />
 
           <MoviesTable
             movies={movies}
