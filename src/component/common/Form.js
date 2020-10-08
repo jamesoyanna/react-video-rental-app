@@ -29,7 +29,7 @@ class Form extends Component {
     return error ? error.details[0].message : null;
   };
 
-  // Hnadling submission of form
+  // Handling submission of form
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate();
@@ -74,9 +74,6 @@ return (
   />
 )
 }
-
-
-
    // Rendering Input field
    renderInput = (name, label, type="text")=>{
        const { data, errors } = this.state;

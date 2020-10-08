@@ -8,7 +8,7 @@ import  {paginate} from "../utils/paginate";
 import ListGroup  from './common/ListGroup';
 import MoviesTable from './MoviesTable';
 import Pagination from "./common/Pagination";
-
+import SearchBox from './common/searchBox';
 
 
 class Movies extends Component {
@@ -17,6 +17,8 @@ class Movies extends Component {
     getGenres: [],
     currentPage: 1,
     pageSize: 4,
+    searchQuery: "",
+    selectGenre: null,
     sortColumn: {path: 'title', order: 'asc'}
   };
 
@@ -50,12 +52,17 @@ class Movies extends Component {
   };
 
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
   };
 
   handleSort = (sortColumn) => {
     this.setState({ sortColumn});
   };
+
+ handleSearch =query =>{
+   this.setState({searchQuery: query, selectedGenre: null, currentPage: 1})
+ }
+
 
   getPagedData =  () =>{
     const {
@@ -113,6 +120,8 @@ class Movies extends Component {
           <p>
             There are <b>{totalCount}</b> movies in the database
           </p>
+
+           <SearchBox  />
 
           <MoviesTable
             movies={movies}
