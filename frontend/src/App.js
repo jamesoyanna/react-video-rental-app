@@ -2,9 +2,8 @@ import React from 'react';
 import Movies from './component/movies';
 import { Route, Redirect, Switch} from 'react-router-dom';
 import MoviesForm from './component/pages/MoviesForm';
-
 import { ToastContainer } from "react-toastify";
-
+//import http from "./component/services/httpService"
 import Rentals from "./component/pages/Rentals";
 import NotFound from "./component/pages/NotFound";
 import Customers from './component/pages/Customers';

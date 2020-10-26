@@ -4,6 +4,6 @@ const config = require('config');
 
 module.exports = function() {
   const db = config.get('db');
-  mongoose.connect(db)
+  mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => winston.info(`Connected to ${db}...`));
 }
